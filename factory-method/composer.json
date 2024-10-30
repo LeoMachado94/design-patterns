@@ -8,7 +8,6 @@
       "FactoryMethod\\Models\\": "src/Models/"
     },
     "files": [
-      "src/Support/helpers.php"
     ]
   },
   "authors": [
