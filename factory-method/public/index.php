@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-use FactoryMethod\Factories\UserFactory;
-
-$r = \FactoryMethod\Models\User::factory()->create(5);
-dump($r);
+$truck = \FactoryMethod\Models\Truck::factory(3);
+$airplane = \FactoryMethod\Models\Airplane::factory(9);
+dump(json_encode($truck), json_encode($airplane));
