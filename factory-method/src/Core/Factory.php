@@ -14,19 +14,29 @@ class Factory
     {
         $factoryClass = new (get_called_class());
 
-        if ($count === 1) {
-            $data = $this->getDataAndReplaceState($factoryClass);
-            return new ($factoryClass->model)(...$state);
+        if ($count > 1) {
+            $items = [];
+
+            while (count($items) < $count) {
+                $data = $this->getDataAndReplaceState($factoryClass);
+
+                if (!empty($state)) {
+                    $data = array_merge($data, $state);
+                }
+
+                $items[] = new ($factoryClass->model)(...$data);
+            }
+
+            return $items;
         }
 
-        $items = [];
+        $data = $this->getDataAndReplaceState($factoryClass);
 
-        while (count($items) < $count) {
-            $data = $this->getDataAndReplaceState($factoryClass);
-            $items[] = new ($factoryClass->model)(...$state);
+        if (!empty($state)) {
+            $data = array_merge($data, $state);
         }
 
-        return $items;
+        return new ($factoryClass->model)(...$data);
     }
 
     public function make(int $count = 1, array $state = [])
