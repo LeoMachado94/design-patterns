@@ -5,7 +5,7 @@
       "FactoryMethod\\": "src",
       "FactoryMethod\\Core\\": "src/Core/",
       "FactoryMethod\\Factories\\": "src/Factories/",
-      "FactoryMethod\\Models\\": "src/Models/"
+      "FactoryMethod\\Models\\": "src/Vehicles/"
     },
     "files": [
     ]

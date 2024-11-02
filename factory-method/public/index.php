@@ -1,7 +1,24 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-$truck = \FactoryMethod\Models\Truck::factory(3);
-$airplane = \FactoryMethod\Models\Airplane::factory(9);
+$vehicles = [
+    'car',
+    'motorcycle'
+];
 
-dd($truck, $airplane);
+$type = array_rand($vehicles);
+$type = $vehicles[$type];
+
+$transport = match ($type)
+{
+    'car' => new \FactoryMethod\CarTransport(),
+    'motorcycle' => new \FactoryMethod\MotorcycleTransport(),
+    default => null
+};
+
+if ($transport === null) {
+    dd('tipo de transporte indefinido');
+}
+
+
+$transport->startTransport();
