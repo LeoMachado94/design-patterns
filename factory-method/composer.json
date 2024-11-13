@@ -3,8 +3,6 @@
   "autoload": {
     "psr-4": {
       "FactoryMethod\\": "src",
-      "FactoryMethod\\Core\\": "src/Core/",
-      "FactoryMethod\\Factories\\": "src/Factories/",
       "FactoryMethod\\Models\\": "src/Vehicles/"
     },
     "files": [

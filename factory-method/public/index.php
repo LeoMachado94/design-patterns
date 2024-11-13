@@ -9,6 +9,8 @@ $vehicles = [
 $type = array_rand($vehicles);
 $type = $vehicles[$type];
 
+echo "Tipo do veículo sorteado: {$type} <br>";
+
 $transport = match ($type)
 {
     'car' => new \FactoryMethod\CarTransport(),
