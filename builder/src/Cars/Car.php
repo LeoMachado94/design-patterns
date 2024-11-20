@@ -34,4 +34,14 @@ class Car
     {
         return $this->seats;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'type' => $this->carType->value ?? null,
+            'engine' => $this->engine->getPower() ?? null,
+            'transmission' => $this->transmission->value ?? null,
+            'seats' => $this->seats ?? null,
+        ];
+    }
 }

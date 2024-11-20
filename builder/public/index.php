@@ -19,9 +19,32 @@ $car = $carBuilder->getResult();
 /**
  * Objetos NÃO Definidos Previamente
  */
-$sportCar = $carBuilder->setCarType(\Builder\Components\CarType::SPORT)
+$sportCar = $carBuilder
+    ->setCarType(\Builder\Components\CarType::SPORT)
     ->setEngine(new \Builder\Components\Engine(4000))
     ->setTransmission(\Builder\Components\Transmission::AUTOMATIC)
-    ->setSeats(2);
+    ->setSeats(2)
+    ->getResult();
 
-dd($truck, $car, $sportCar);
+/**
+ * Objetos NÃO Definidos Previamente - Não Resetado, vai pegar os valores setador na instância
+ */
+$sportCar2 = $carBuilder
+    ->setCarType(\Builder\Components\CarType::SPORT)
+    ->getResult();
+
+/**
+ * Objetos NÃO Definidos Previamente - Resetado
+ */
+$carBuilder = new \Builder\Builders\CarBuilder();
+$sportCar3 = $carBuilder
+    ->setEngine(new \Builder\Components\Engine(9999))
+    ->setCarType(\Builder\Components\CarType::SPORT);
+
+dd(
+    $truck->toArray(),
+    $car->toArray(),
+    $sportCar->toArray(),
+    $sportCar2->toArray(),
+//    $sportCar3->getResult(), // Gera erro pois não foram definidas as propriedades necessárias
+);
