@@ -1,0 +1,23 @@
+{
+  "name": "leomachado/factory-method",
+  "autoload": {
+    "psr-4": {
+      "Adapter\\": "src",
+      "Adapter\\Adapters\\": "src/Adapters/",
+      "Adapter\\MercadoPago\\": "src/MercadoPago/",
+      "Adapter\\Paypal\\": "src/Paypal/"
+    },
+    "files": [
+    ]
+  },
+  "authors": [
+    {
+      "name": "Leonardo Machado",
+      "email": "leo94.machado@gmail.com"
+    }
+  ],
+  "require": {
+    "symfony/var-dumper": "^7.1",
+    "fzaninotto/faker": "*"
+  }
+}
