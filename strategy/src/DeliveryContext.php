@@ -1,18 +1,54 @@
 <?php
 
-namespace src;
+namespace Strategy;
 
-use src\Strategies\DeliveryStrategy;
+use Strategy\Strategies\Customer;
+use Strategy\Strategies\DeliveryStrategy;
+use Strategy\Strategies\Product;
 
-class DeliveryContext
+readonly class DeliveryContext
 {
-    public function __construct(private readonly DeliveryStrategy $strategy) {}
+    public function __construct(
+        private DeliveryStrategy $strategy,
+        private array $payload
+    ) {}
 
     // Run delivery
-    public function execute()
+    public function getData(): array
     {
-        $client = $this->strategy->getCustomer();
-        // Cadastra o Cliente
-        // Envia E-mail de boas vindas
+        return [
+            'customer' => $this->strategy->getCustomer($this->payload),
+            'products' => $this->strategy->getProducts($this->payload)
+        ];
+    }
+
+    public function getCustomer(): Customer
+    {
+        return $this->strategy->getCustomer($this->payload);
+    }
+
+    /**
+     * @return Product[]
+     */
+    public function getProducts(): array
+    {
+        return $this->strategy->getProducts($this->payload);
+    }
+
+    public function delivery(): void
+    {
+        $provider = $this->strategy->providerName;
+
+        echo "******************************* Inicio Entrega {$provider} *************************** <br>";
+        $customer = $this->getCustomer();
+
+        echo "Entregando produtos para o cliente: {$customer->name}<br>";
+
+        foreach ($this->getProducts() as $product) {
+            echo "Matriculado no curso {$product->title}<br>";
+        }
+
+        echo "Enviando e-mail de boas vindas: {$customer->email}<br>";
+        echo "******************************* Fim Entrega {$provider} ***************************** <br>";
     }
 }

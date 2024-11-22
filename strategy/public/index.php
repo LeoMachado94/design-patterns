@@ -69,9 +69,27 @@ echo "--------------------------------------------------------------------------
 echo "----------------------------------------------------------------------------------------------------------------<br>";
 echo "--------------------------------- COM STRATEGY --------------------------------------------------------<br>";
 echo "----------------------------------------------------------------------------------------------------------------<br>";
-(new \Strategy\Delivery)->execute($payloads['eduzz'], 'eduzz');
-echo "----------------------------------------------------------------------------------------------------------------<br>";
-(new \Strategy\Delivery)->execute($payloads['hotmart'], 'hotmart');
-echo "----------------------------------------------------------------------------------------------------------------<br>";
-(new \Strategy\Delivery)->execute($payloads['kiwify'], 'kiwify');
-echo "----------------------------------------------------------------------------------------------------------------<br>";
+
+$provider = 'eduzz';
+$payload = $payloads[$provider];
+
+$strategyClass = match($provider) {
+    'hotmart' => new \Strategy\Strategies\HotmartDeliveryStrategy(),
+    'kiwify' => new \Strategy\Strategies\KiwifyDeliveryStrategy(),
+    default => new \Strategy\Strategies\EduzzDeliveryStrategy()
+};
+
+// Code (implementação que seria utilizada na controller/service/etc)
+$strategy = new \Strategy\DeliveryContext(
+    $strategyClass,
+    $payload
+);
+
+$strategy->delivery();
+
+//(new \Strategy\Delivery)->execute($payloads['eduzz'], 'eduzz');
+//echo "----------------------------------------------------------------------------------------------------------------<br>";
+//(new \Strategy\Delivery)->execute($payloads['hotmart'], 'hotmart');
+//echo "----------------------------------------------------------------------------------------------------------------<br>";
+//(new \Strategy\Delivery)->execute($payloads['kiwify'], 'kiwify');
+//echo "----------------------------------------------------------------------------------------------------------------<br>";

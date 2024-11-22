@@ -1,9 +1,13 @@
 <?php
-namespace src\Strategies;
+namespace Strategy\Strategies;
 
-class DeliveryStrategy
+interface DeliveryStrategy
 {
-    public function __construct(
-        private DeliveryStrategy $strategy
-    ) {}
+    public function getCustomer(array $payload): Customer;
+
+    /**
+     * @param array $payload
+     * @return Product[]
+     */
+    public function getProducts(array $payload): array;
 }
